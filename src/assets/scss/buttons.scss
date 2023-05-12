@@ -1,0 +1,25 @@
+.btn {
+    --bs-btn-font-size: 12px;
+
+    transition: background-color 0.2s ease-in-out,
+                scale 0.2s ease-in-out;
+}
+
+.btn-primary {
+    --bs-btn-bg: #{$main_color};
+    --bs-btn-border-color: #{$main_color};
+    --bs-btn-hover-bg: #{$main_color_hover};
+    --bs-btn-hover-border-color: #{$main_color_hover};
+    --bs-btn-active-bg: #{$main_color_active};
+    --bs-btn-active-border-color: #{$main_color_active};
+    --bs-btn-disabled-bg: #{$main_color_disabled};
+    --bs-btn-disabled-border-color: #{$main_color_disabled};
+
+    &:hover {
+        scale: 1.01;
+    }
+
+    &:active {
+        scale: 0.97;
+    }
+}
