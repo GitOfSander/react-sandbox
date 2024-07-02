@@ -1,0 +1,118 @@
+.card {
+    position: relative;
+    background-color: #FFFFFF;
+    border: 1px solid #EAEDF3;
+    border-radius: 10px;
+
+    .loading {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        background: rgba(255,255,255,0.5);
+
+        :global(.spinner-border) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            width: 30px;
+            height: 30px;
+            margin-top: -15px;
+            margin-left: -15px;
+        }
+    }
+
+    .error_overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        padding: 50px;
+
+        background: rgba(255,255,255,0.5);
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            display: block;
+
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 24px;
+
+            padding: 7px 12px;
+
+            background-color: #E7492E;
+            border-radius: 10px;
+
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+
+        min-height: 60px;
+        padding: 10px 20px;
+
+        border-bottom: 1px solid #EAEDF3;
+
+        .left {
+            h2 {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+
+                margin: 0;
+            }
+
+            h3 {
+                color: #9EA0A5;
+                font-size: 12px;
+                line-height: 18px;
+
+                margin: 0;
+            }
+
+            h2 + h3 {
+                margin-top: 7px;
+            }
+        }
+
+        .right {
+
+        }
+    }
+
+    .body {
+        position: relative;
+        padding: 29px 20px;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+
+        min-height: 60px;
+        padding: 10px 20px;
+
+        border-top: 1px solid #EAEDF3;
+    }
+}

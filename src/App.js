@@ -14,6 +14,8 @@ import Register from "./pages/account/register"
 import ForgotPassword from "./pages/account/forgot-password"
 import ResetPassword from "./pages/account/reset-password"
 import Home from "./pages/dashboard/home"
+import Research from "./pages/dashboard/research"
+import Recipes from "./pages/dashboard/recipes"
 
 
 function App() {
@@ -39,6 +41,10 @@ function App() {
               </Route>
               <Route path="dashboard" element={<Dashboardlayout />} >
                 <Route index element={<Home />} />
+                <Route path="research" element={<Research />} />
+                <Route path="recipes" element={<Recipes />} />
+                <Route path="trades" element={<Home />} />
+                <Route path="fitness" element={<Home />} />
               </Route>
             </Route>
           </Routes>
