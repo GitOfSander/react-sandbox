@@ -6,7 +6,8 @@ import AppContext from "./app.context"
 
 // Layouts
 import LoginLayout from "./layouts/login"
-import Dashboardlayout from "./layouts/dashboard"
+import DashboardLayout from "./layouts/dashboard"
+import RecipesLayout from "./layouts/recipes"
 
 // Pages
 import Login from "./pages/account/login"
@@ -16,6 +17,8 @@ import ResetPassword from "./pages/account/reset-password"
 import Home from "./pages/dashboard/home"
 import Research from "./pages/dashboard/research"
 import Recipes from "./pages/dashboard/recipes"
+import Recipe from "./pages/dashboard/recipe"
+import RecipeForm from "./pages/dashboard/form"
 
 
 function App() {
@@ -39,10 +42,15 @@ function App() {
                 <Route path="wachtwoord-herstellen" element={<ResetPassword />} />
                 <Route path="registreren" element={<Register />} />
               </Route>
-              <Route path="dashboard" element={<Dashboardlayout />} >
+              <Route path="dashboard" element={<DashboardLayout />} >
                 <Route index element={<Home />} />
                 <Route path="research" element={<Research />} />
-                <Route path="recipes" element={<Recipes />} />
+                <Route path="recipes" element={<RecipesLayout />}>
+                  <Route index element={<Recipes />} />
+                  <Route path=":id" element={<Recipe />} />
+                  <Route path="add" element={<RecipeForm />} />
+                  <Route path="edit/:id" element={<RecipeForm />} />
+                </Route>
                 <Route path="trades" element={<Home />} />
                 <Route path="fitness" element={<Home />} />
               </Route>
