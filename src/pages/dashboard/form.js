@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useMemo, useRef,useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Card, CardBody, CardHeader } from '../../components/card';
 import CheckboxList from '../../components/fields/checkboxList';
@@ -17,6 +17,77 @@ const RecipeForm = () => {
         tags: []
     });
     const tags = ["Sweet", "Salty", "Breakfast", "Lunch", "Dinner"];
+    const quill = useRef();
+
+    const imageHandler = useCallback(() => {
+        // Create an input element of type 'file'
+        const input = document.createElement("input");
+        input.setAttribute("type", "file");
+        input.setAttribute("accept", "image/*");
+        input.click();
+    
+        // When a file is selected
+        input.onchange = () => {
+          const file = input.files[0];
+          const reader = new FileReader();
+    
+          // Read the selected file as a data URL
+          reader.onload = () => {
+            const imageUrl = reader.result;
+            console.log(quill);
+            const quillEditor = quill.current.getEditor();
+    
+            // Get the current selection range and insert the image at that index
+            const range = quillEditor.getSelection(true);
+            quillEditor.insertEmbed(range.index, "image", imageUrl, "user");
+          };
+    
+          reader.readAsDataURL(file);
+        };
+      }, []);
+    
+      const modules = useMemo(
+        () => ({
+          toolbar: {
+            container: [
+              [{ header: [2, 3, 4, false] }],
+              ["bold", "italic", "underline", "blockquote"],
+              [{ color: [] }],
+              [
+                { list: "ordered" },
+                { list: "bullet" },
+                { indent: "-1" },
+                { indent: "+1" },
+              ],
+              ["link", "image"],
+              ["clean"],
+            ],
+            handlers: {
+              image: imageHandler,
+            },
+          },
+          clipboard: {
+            matchVisual: true,
+          },
+        }),
+        [imageHandler]
+      );
+
+    const formats = [
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "blockquote",
+        "list",
+        "bullet",
+        "indent",
+        "link",
+        "image",
+        "color",
+        "clean",
+      ];
 
     useEffect(() => {
         if (id) {
@@ -91,6 +162,7 @@ const RecipeForm = () => {
                                         <input
                                             type="text"
                                             name="title"
+                                            className='form-control'
                                             value={recipe.title}
                                             onChange={handleChange}
                                         />
@@ -98,11 +170,12 @@ const RecipeForm = () => {
                                     <div>
                                         <label>Description:</label>
                                         <QuillEditor
-
                                             theme="snow"
                                             name="editor"
                                             onChange={handleChange}
-                                        /> //https://medium.com/@andrewkizito54/creating-a-rich-text-editor-using-react-and-react-quill-3ea990435ade
+                                            formats={formats}
+                                            modules={modules}
+                                        />
                                         {/*<Editor
                                             ref={quillRef}
                                             readOnly={readOnly}
